@@ -169,6 +169,7 @@
 		84C83736242A79B000734A42 /* HapMetalPixelBufferTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C8372B242A79B000734A42 /* HapMetalPixelBufferTexture.m */; };
 		84C83737242A79B000734A42 /* MetalHapDisplayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C8372C242A79B000734A42 /* MetalHapDisplayer.m */; };
 		84C83738242A79B000734A42 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 84C8372D242A79B000734A42 /* Shaders.metal */; };
+		DF743284258613A40096A2F9 /* sse2neon.h in Headers */ = {isa = PBXBuildFile; fileRef = DF743283258613A30096A2F9 /* sse2neon.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +417,7 @@
 		84C83731242A79B000734A42 /* MetalHapDisplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalHapDisplayer.h; sourceTree = "<group>"; };
 		84C83732242A79B000734A42 /* HapMetalPixelBufferTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HapMetalPixelBufferTexture.h; sourceTree = "<group>"; };
 		84F6F9362418F9D600E1C63D /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		DF743283258613A30096A2F9 /* sse2neon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sse2neon.h; path = source/DXT/sse2neon.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +498,7 @@
 		1A0535F21A38C9CC005B47BD /* DXT (and squish) */ = {
 			isa = PBXGroup;
 			children = (
+				DF743283258613A30096A2F9 /* sse2neon.h */,
 				1A0535FD1A38CA11005B47BD /* DXTBlocks.c */,
 				1A0535FE1A38CA11005B47BD /* DXTBlocks.h */,
 				1A0535FF1A38CA11005B47BD /* DXTBlocksSSSE3.c */,
@@ -820,6 +823,7 @@
 				1A0536221A38CA5D005B47BD /* ImageMath.h in Headers */,
 				1A0536241A38CA5D005B47BD /* YCoCg.h in Headers */,
 				1AAE52E01CFDDB8600BA5205 /* SquishRGTC1Decoder.h in Headers */,
+				DF743284258613A40096A2F9 /* sse2neon.h in Headers */,
 				1A05360C1A38CA11005B47BD /* DXTBlocks.h in Headers */,
 				1A05360E1A38CA11005B47BD /* DXTEncoder.h in Headers */,
 				1A0536161A38CA11005B47BD /* YCoCgDXT.h in Headers */,
@@ -898,6 +902,7 @@
 				1A97F5A81A38ABBF00E0DC74 /* Headers */,
 				1A97F5A91A38ABBF00E0DC74 /* Resources */,
 				1A97F5DA1A38AD2900E0DC74 /* CopyFiles */,
+				DF7EAC79241BC13700A0A760 /* COPY TO FAUCON */,
 			);
 			buildRules = (
 			);
@@ -1067,6 +1072,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "codesign --verbose --force --deep -o runtime -f -s \"Developer ID Application: Vidvox, LLC\" \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/Sparkle.framework/Versions/A/Resources/AutoUpdate.app\"";
+		};
+		DF7EAC79241BC13700A0A760 /* COPY TO FAUCON */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "COPY TO FAUCON";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf \"$PROJECT_DIR/../../../Faucon/@app/lib/HapInAVFoundation.framework\"\ncp -av \"$TARGET_BUILD_DIR/HapInAVFoundation.framework\" \"$PROJECT_DIR/../../../Faucon/@app/lib/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1410,7 +1429,6 @@
 					"\"$(BUILT_PRODUCTS_DIR)/include/squish\"",
 					"\"$(BUILT_PRODUCTS_DIR)/include/snappy\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = HapInAVFoundation;
 				SKIP_INSTALL = YES;
 			};
@@ -1435,7 +1453,6 @@
 					"\"$(BUILT_PRODUCTS_DIR)/include/squish\"",
 					"\"$(BUILT_PRODUCTS_DIR)/include/snappy\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = HapInAVFoundation;
 				SKIP_INSTALL = YES;
 			};
@@ -1485,8 +1502,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1527,8 +1542,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1537,7 +1550,6 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = ssse3;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Vidvox, LLC (KH97KZU7A7)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
@@ -1552,7 +1564,6 @@
 				INFOPLIST_FILE = HapInAVFoundation/Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @loader_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Vidvox.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1564,7 +1575,6 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_X86_VECTOR_INSTRUCTIONS = ssse3;
-				CODE_SIGN_IDENTITY = "Developer ID Application: Vidvox, LLC (KH97KZU7A7)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
@@ -1579,7 +1589,6 @@
 				INFOPLIST_FILE = HapInAVFoundation/Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @loader_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Vidvox.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

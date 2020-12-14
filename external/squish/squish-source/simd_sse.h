@@ -26,9 +26,17 @@
 #ifndef SQUISH_SIMD_SSE_H
 #define SQUISH_SIMD_SSE_H
 
-#include <xmmintrin.h>
+#ifdef __x86_64__
+   #include <xmmintrin.h>
+#else
+  #include "sse2neon.h"
+#endif
 #if ( SQUISH_USE_SSE > 1 )
-#include <emmintrin.h>
+#ifdef __x86_64__
+   #include <emmintrin.h>
+#else
+  #include "sse2neon.h"
+#endif
 #endif
 
 #define SQUISH_SSE_SPLAT( a )										\

@@ -26,7 +26,11 @@
  */
 
 #include "DXTBlocks.h"
-#include <tmmintrin.h>
+#ifdef __x86_64__
+   #include <tmmintrin.h>
+#else
+  #include "sse2neon.h"
+#endif
 
 void HapCodecDXTReadBlockBGRASSSE3(const uint8_t *copy_src, uint8_t *copy_dst, unsigned int src_bytes_per_row)
 {

@@ -41,7 +41,11 @@ void HapCodecDXTReadBlockRGBA(const uint8_t *copy_src, uint8_t *copy_dst, unsign
 #if !defined(HAP_SSSE3_ALWAYS_AVAILABLE)
 
 #if defined(_WIN32)
-#include <immintrin.h>
+#ifdef __x86_64__
+   #include <immintrin.h>
+#else
+  #include "sse2neon.h"
+#endif
 #define hap_cpuid(i,t)    __cpuid((i),(t))
 
 #else
