@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CoreMedia.h>
 #import "hap.h"
-#import "os/lock.h"
 
 
 
@@ -33,7 +32,7 @@ This object represents a frame, and holds all the values necessary to decode a h
 	OSType					rgbPixelFormat;	//	set to 'kCVPixelFormatType_32BGRA' or 'kCVPixelFormatType_32RGBA'
 	NSSize					rgbImgSize;
 	
-	os_unfair_lock		atomicLock;
+	OSSpinLock				atomicLock;
 	id						userInfo;	//	RETAINED, arbitrary ptr used to keep a piece of user-specified data with the frame
 	
 	BOOL					decoded;	//	when decoding is complete, this is set to YES.
